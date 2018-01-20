@@ -13,9 +13,9 @@ parser.add_argument('-o', '--output', help="Ouput file name", required=True)
 parser.add_argument('-v', '--verbose', help="Verbose", required=False)
 args = parser.parse_args()
 
-print 'Read architecture from', args.architecture
-print 'Read weights from', args.weights
-print 'Writing to', args.output
+print ('Read architecture from', args.architecture)
+print ('Read weights from', args.weights)
+print ('Writing to', args.output)
 
 arch = open(args.architecture).read()
 model = model_from_json(arch)
@@ -29,11 +29,11 @@ with open(args.output, 'w') as fout:
     layers = []
     for ind, l in enumerate(arch["config"]):
         if args.verbose:
-            print ind, l
+            print (ind, l)
         fout.write('layer ' + str(ind) + ' ' + l['class_name'] + '\n')
 
         if args.verbose:
-            print str(ind), l['class_name']
+            print (str(ind), l['class_name'])
         layers += [l['class_name']]
         if l['class_name'] == 'Convolution2D':
             #fout.write(str(l['config']['nb_filter']) + ' ' + str(l['config']['nb_col']) + ' ' + str(l['config']['nb_row']) + ' ')
@@ -44,7 +44,7 @@ with open(args.output, 'w') as fout:
 
             W = model.layers[ind].get_weights()[0]
             if args.verbose:
-                print W.shape
+                print (W.shape)
             fout.write(str(W.shape[0]) + ' ' + str(W.shape[1]) + ' ' + str(W.shape[2]) + ' ' + str(W.shape[3]) + ' ' + l['config']['border_mode'] + '\n')
 
             for i in range(W.shape[0]):
@@ -63,7 +63,7 @@ with open(args.output, 'w') as fout:
             #fout.write(str(l['config']['output_dim']) + '\n')
             W = model.layers[ind].get_weights()[0]
             if args.verbose:
-                print W.shape
+                print (W.shape)
             fout.write(str(W.shape[0]) + ' ' + str(W.shape[1]) + '\n')
 
 

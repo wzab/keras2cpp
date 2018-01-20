@@ -14,12 +14,12 @@ TEST_BIN="test_bin"
 
 echo 'Test, step 1'
 echo 'Dump network into plain text file' $DUMPED_CNN
-python dump_to_simple_cpp.py -a $INPUT_ARCH -w $INPUT_WEIGHTS -o $DUMPED_CNN
+python3 dump_to_simple_cpp.py -a $INPUT_ARCH -w $INPUT_WEIGHTS -o $DUMPED_CNN
 
 echo 'Test, step 2'
 echo 'Generate random input sample and save in' $DATA_SAMPLE
 echo 'Compute ouput on generated sample with Keras and store predictions for comparison'
-python test_run_cnn.py -a $INPUT_ARCH -w $INPUT_WEIGHTS -d $DATA_SAMPLE -o $KERAS_OUTPUT
+python3 test_run_cnn.py -a $INPUT_ARCH -w $INPUT_WEIGHTS -d $DATA_SAMPLE -o $KERAS_OUTPUT
 
 echo 'Test, step 3'
 echo 'Compile keras2cpp code'
@@ -29,7 +29,7 @@ echo 'Run predictions with dumped network and random data sample from step 2'
 
 echo 'Test, step 4'
 echo 'Compare Keras and Keras2cpp outputs'
-python test_compare.py --keras_response $KERAS_OUTPUT --keras2cpp_response $KERAS2CPP_OUTPUT
+python3 test_compare.py --keras_response $KERAS_OUTPUT --keras2cpp_response $KERAS2CPP_OUTPUT
 
 # Clean
 echo 'Cleaning after test'
